@@ -1,0 +1,12 @@
+$height: 80%;
+$width: 95%;
+
+.modal {
+    position: fixed;
+    background: #efe8e4;
+    left: 2.5%;
+    top: 10%;
+    min-width: $width;
+    min-height: $height;
+    border-radius: 40px;
+}

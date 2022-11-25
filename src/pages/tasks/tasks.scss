@@ -1,0 +1,18 @@
+.tasks {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.task {
+  width: 150px;
+  height: 100px;
+  border: 2px solid blue;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

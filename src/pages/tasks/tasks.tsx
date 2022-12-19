@@ -1,35 +1,34 @@
-import React from 'react';
-import "./tasks.scss"
-import Button from "../../components/share/button/button";
-import {useAppDispatch} from "../../hooks/redux";
-import {selectProject} from "../../services/actions/project";
-import {openModal} from "../../services/actions/modal";
+import React from "react";
+import "./tasks.scss";
+import { useAppDispatch } from "../../hooks/redux";
 
 const Tasks = () => {
-    const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-    function getTaskInfo() {
-        openModal(dispatch)
-    }
+  function getTaskInfo() {
 
-    function goBack() {
-        selectProject(dispatch, {})
-    }
+  }
 
-    return (
-        <>
-            <h1>Choose a task</h1>
-            <div className="tasks">
-                <div className="task" onClick={getTaskInfo}>Task 1</div>
-                <div className="task">Task 2</div>
-                <div className="task">Task 3</div>
-            </div>
+  function goBack() {
 
-            <Button onClick={goBack}>
-                Go Back
-            </Button>
-        </>
-    );
-}
+  }
+
+  return (
+    <>
+      <h1>Choose a task</h1>
+      <div className="tasks">
+        <div className="task" onClick={getTaskInfo}>
+          Task 1
+        </div>
+        <div className="task">Task 2</div>
+        <div className="task">Task 3</div>
+      </div>
+
+      <button type="button" className="btn btn-primary" onClick={goBack}>
+        Primary
+      </button>
+    </>
+  );
+};
 
 export default Tasks;

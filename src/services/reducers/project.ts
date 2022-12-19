@@ -1,63 +1,99 @@
 import {
-    CREATE_PROJECT,
-    DELETE_PROJECT,
-    GET_PROJECTS,
-    SELECT_PROJECT,
-    UPDATE_PROJECT,
+    GET_PROJECTS_REQUEST,
+    GET_PROJECTS_SUCCESS,
+    GET_PROJECTS_FAILED,
+    CREATE_PROJECT_SUCCESS,
+    CREATE_PROJECT_FAILED,
+    UPDATE_PROJECT_SUCCESS,
+    UPDATE_PROJECT_FAILED,
+    DELETE_PROJECT_SUCCESS,
+    DELETE_PROJECT_FAILED,
     TProjectActions,
 } from "../actions/project";
 import {IProject} from "../../utils/types";
 
 interface IProjectState {
     selectedProject: IProject | object;
-    projects: IProject[];
+    loading: boolean;
+    success: boolean;
+    error: boolean;
+    projects: any;
 }
 
 const initialState = {
     selectedProject: {},
-    projects: [
-        {id: "1", name: "Project 1", tasks: []},
-        {id: "2", name: "Project 2", tasks: []},
-        {id: "3", name: "Project 3", tasks: []},
-    ],
+    loading: false,
+    success: false,
+    error: false,
+    projects: "",
 }
 
 export const projectReducer = (state: IProjectState = initialState, action: TProjectActions) => {
     switch (action.type) {
-        case CREATE_PROJECT: {
+        case GET_PROJECTS_REQUEST: {
             return {
                 ...state,
-                projects: [...state.projects, action.payload]
+                loading: true,
+                error: false,
             }
         }
-        case DELETE_PROJECT: {
+        case GET_PROJECTS_SUCCESS: {
             return {
                 ...state,
-                projects: [...state.projects.filter((el) => el.id !== action.payload)]
-            }
-        }
-        case GET_PROJECTS: {
-            return {
-                ...state,
+                loading: false,
+                success: true,
+                error: false,
                 projects: action.payload
             }
         }
-        case UPDATE_PROJECT: {
+        case GET_PROJECTS_FAILED: {
             return {
                 ...state,
-                projects: state.projects.map(el => {
-                    if(el.id === action.payload.id) {
-                        el.name = action.payload.name
-                    } return el;
-                })
             }
         }
-        case SELECT_PROJECT: {
+        case CREATE_PROJECT_SUCCESS: {
             return {
                 ...state,
-                selectedProject: action.payload
+                success: true,
+                error: false,
             }
         }
+        case CREATE_PROJECT_FAILED: {
+            return {
+                ...state,
+                success: false,
+                error: true,
+            }
+        }
+        case UPDATE_PROJECT_SUCCESS: {
+            return {
+                ...state,
+                success: true,
+                error: false,
+            }
+        }
+        case UPDATE_PROJECT_FAILED: {
+            return {
+                ...state,
+                success: false,
+                error: true,
+            }
+        }
+        case DELETE_PROJECT_SUCCESS: {
+            return {
+                ...state,
+                success: true,
+                error: false,
+            }
+        }
+        case DELETE_PROJECT_FAILED: {
+            return {
+                ...state,
+                success: false,
+                error: true,
+            }
+        }
+
         default: {
             return state;
         }
